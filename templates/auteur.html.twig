@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+<link rel="stylesheet" href="{{ asset('asset/style.css') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<main>
+    <h1 class="titre">Auteur</h1>
+    <article class="exo_article">
+        {% for author in authors %}
+            <div class="exo_boucle">
+                <a href="{{ path('author_show', {'id':author.id}) }}"><h2>{{ author.lastName }}</h2></a>
+                <a href="{{ path('author_show', {'id':author.id}) }}"><p>{{ author.firstName }}</p></a>
+                <a href="{{ path('author_show', {'id':author.id}) }}"><h3>{{ author.bio }}</h3></a>
+            </div>
+        {% endfor %}
+    </article>
+
+</main>
+
+</body>
+</html>

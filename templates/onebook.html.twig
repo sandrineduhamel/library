@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<link rel="stylesheet" href="{{ asset('asset/style.css') }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="one">
+        <h2 class="one_titre">{{ book.titre }}</h2>
+        <div class="one_img"><img  src="{{ asset('asset/img/perrault.jpg') }}" alt=""></div>
+        <p class="one_resume">{{ book.resume }}</p>
+        <a href="{{ path('book_list') }}"> <h3 class="one_genre">{{ book.genre }}</h3></a>
+    </div>
+</body>
+</html>
