@@ -1,0 +1,27 @@
+{% extends 'base/base.html.twig' %}
+
+{% block main %}
+
+  {#  {% for author in authors %}
+        {{ author.name }}
+        {% for book in author.books %}
+            {{ book.titre }}
+        {% endfor %}
+    {% endfor %}#}
+
+
+    <article class="boite1">
+        {% for author in authors %}
+            <div class="boucle">
+                <a href="{{ path('author_show', {'id':author.id}) }}"><h2>{{ author.lastName }} {{ author.firstName }}</h2></a>
+
+               <h3>{{ author.bio }}</h3>
+                <a href="{{ path('author_update', {'id' : author.id}) }}">Modifier l'auteur</a>
+                <a href="{{ path('author_delete', {'id' : author.id}) }}">Supprimer l'auteur</a>
+                <a href="{{ path ('author_insert') }}">Ajouter un auteur</a>
+            </div>
+        {% endfor %}
+    </article>
+
+
+{% endblock %}

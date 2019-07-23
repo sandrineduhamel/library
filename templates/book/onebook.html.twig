@@ -1,0 +1,15 @@
+{% extends 'base/base.html.twig' %}
+
+{% block main %}
+
+    <div class="one">
+        <h2 class="one_titre">{{ book.titre }}</h2>
+        <div class="one_img"><img  src="{{ asset('assets/img/perrault.jpg') }}" alt=""></div>
+        <p class="one_resume">{{ book.resume }}</p>
+        <a href="{{ path('book_list') }}"> <h3 class="one_genre">{{ book.genre }}</h3></a>
+        <a href="{{ path('admin_book_delete', {'id' : book.id}) }}">Supprimer l'article</a>
+        <a href="{{ path('admin_book_update', {'id' : book.id}) }}">Modifier l'article</a>
+        <a href="{{ path('form_book_create') }}">Ajouté un article</a>
+    </div>
+
+{% endblock %}

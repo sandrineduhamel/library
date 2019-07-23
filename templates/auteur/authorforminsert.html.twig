@@ -1,0 +1,28 @@
+{% extends 'base/base.html.twig' %}
+
+{% block main %}
+
+{{ form_start(formAuthorView) }}
+    <div class="form">
+        {{form_label(formAuthorView.lastName)}}
+        {{form_widget(formAuthorView.lastName,{'attr':{'class':"lastName",'placeholder':"lastname"}})}}
+
+        {{form_label(formAuthorView.firstName)}}
+        {{form_widget(formAuthorView.firstName, {'attr':{'class':"firstname",'placeholder':"firstname"}})}}
+
+        {{form_label(formAuthorView.birthDate)}}
+        {{form_widget(formAuthorView.birthDate,{'attr':{'class':"birthdate",'placeholder':"birthdate"}})}}
+
+        {{form_label(formAuthorView.deathDate)}}
+        {{form_widget(formAuthorView.deathDate,{'attr':{'class':"deathdate",'placeholder':"deathdate"}})}}
+
+        {{form_label(formAuthorView.bio)}}
+        {{form_widget(formAuthorView.bio)}}
+
+        {{form_label(formAuthorView.enregistrer)}}
+        {{form_widget(formAuthorView.enregistrer)}}
+    </div>
+{{ form_end(formAuthorView) }}
+
+
+{% endblock %}

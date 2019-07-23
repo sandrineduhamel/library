@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,12 +47,33 @@ class Author
         return $this->id;
     }
 
-    public function getlastName(): ?string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    public function setlastName(string $lastName): self
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="author")
+     */
+    private $books;
+
+    //un constructeur est une méthode qui sera appelée automathiquement
+    //à chaque fois qu'une instance de la classe est créee
+    //(à chaqu fois que je fait New Author() )
+    public function __construct()
+    {
+        //je déclare ma propriété books en tant qu'array
+        //car elle peut contenir plusieurs livre
+        //ArrayCollection se comporte comme un array (avec plus
+        //possibilités)
+        $this->books = new ArrayCollection();
+    }
+
+    public function getBooks(){
+        return $this->books;
+    }
+
+    public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
 
@@ -61,6 +83,14 @@ class Author
     public function getFirstName(): ?string
     {
         return $this->firstName;
+    }
+    
+    /**
+     * @param mixed $books
+     */
+    public function setBooks($books): void
+    {
+        $this->books = $books;
     }
 
     public function setFirstName(string $firstName): self

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use phpDocumentor\Reflection\DocBlock\Tags\Author;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -18,6 +19,53 @@ class BookRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Book::class);
     }
+
+    public function getBooks($search)
+    {
+        // LIGNE A MODIFIER, VALEUR A RECUPERER DEPUIS L'URL (DONC A TRAITER DANS LE CONTROLEUR)
+        // je récupère le query builder, qui me permet de créer des
+        // requetes SQL
+        $qb = $this->createQueryBuilder('b');
+        // je sélectionne tous les livres de la base de données
+        $query = $qb->select('b')
+            // si le 'word' est trouvé dans le titre
+            ->where('b.titre LIKE :search')
+            // j'utilise le setParameter pour sécuriser la requete
+            ->setParameter('search', '%'.$search.'%')
+            // je créé la requete SQL
+            ->getQuery();
+        // je récupère les résultats sous forme d'array
+        $result = $query->getArrayResult();
+
+        return $result;
+    }
+
+    public function getSearchAuthor($search = null, $author = null)
+    {
+        $qb = $this->createQueryBuilder('b');
+
+        $qb->select('b');
+
+        if(!empty($author)) {
+            $qb->andWhere('b.author = :id')
+            ->setParameter('id', $author);
+        }
+
+        if(!empty($search)) {
+            $qb->andWhere('b.titre LIKE :search')
+            ->setParameter('search', '%'.$search.'%');
+        }
+
+        $query = $qb->getQuery();
+        $result = $query->getArrayResult();
+
+        return $result;
+    }
+
+
+
+
+
 
     /**
      * Je créée une nouvelle requête en bdd, pour
@@ -52,6 +100,7 @@ class BookRepository extends ServiceEntityRepository
         $resultats = $query->getArrayResult();
         return $resultats;
     }
+
 
 
     // /**

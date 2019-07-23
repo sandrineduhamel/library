@@ -1,0 +1,28 @@
+{% extends 'base/base.html.twig' %}
+
+{% block main %}
+
+
+
+    <div class="exo_author">
+        <div class="exo_author_bio">
+        <h2>{{ author.lastName }} {{ author.firstName }}</h2>
+
+        <p >{{ author.bio }}</p>
+        </div>
+    </div>
+    <a href="{{ path('author_update', {'id' : author.id}) }}">Modifier l'auteur</a>
+    <a href="{{ path('author_delete', {'id' : author.id}) }}">Supprimer l'auteur</a>
+    <a href="{{ path ('author_insert') }}">Ajouter un auteur</a>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+

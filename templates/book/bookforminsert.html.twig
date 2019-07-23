@@ -1,0 +1,27 @@
+
+
+{% extends 'base/base.html.twig' %}
+
+{% block main %}
+
+    {{form(formBookView)}}
+
+    <div class="form_book">
+
+        {{form_widget(formBookView.titre)}}
+
+
+        {{form_widget(formBookView.genre)}}
+
+
+        {{form_widget(formBookView.resume)}}
+
+
+        {{form_widget(formBookView.nombreDePages)}}
+
+
+    </div>
+    {{ form_end(formBookView) }}
+
+
+{% endblock %}

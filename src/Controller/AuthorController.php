@@ -4,45 +4,48 @@
 namespace App\Controller;
 
 
+use App\Entity\Author;
+use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
+use App\Repository\BookRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AuthorController extends AbstractController
 {
     /**
-     * @param AuthorRepository $authorRepository
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/author/list",name="author_list")
+     * @Route("/authors/list", name="authors_list")
      */
-   public function authorList(AuthorRepository $authorRepository){
+   public function authorsList(AuthorRepository $authorRepository){
 
-       return $this->render('auteur.html.twig',[
+       return $this->render('auteur/authorsList.html.twig',[
            'authors' => $authorRepository->findAll()
        ]);
 
    }
 
     /**
-     * @param AuthorRepository $authorRepository
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/author/show/{id}", name="author_show")
      */
-   public function authorShow(AuthorRepository $authorRepository, $id){
-       return $this->render('auteur.html.twig',[
-           'authors'=> $authorRepository->find($id)
+    public function authorShow(AuthorRepository $authorRepository, $id){
+       return $this->render('auteur/authorShow.html.twig',[
+           'author'=> $authorRepository->find($id)
        ]);
    }
 
     /**
-     * @Route("/author/bio/{word}", name="authors_bio")
+     * @Route("/author/bio", name="authors_bio")
      */
-   public function authorsByBiography(AuthorRepository $authorRepository, $word){
-       $authors= $authorRepository->getAuthorsByBio($word);
+   public function authorsByBiography(AuthorRepository $authorRepository, Request $request){
 
-       return $this->render('auteur.html.twig', [
+       $word = $request->query->get('word'); // ou passée en wildcard dans l'url
+       $authors = $authorRepository->getAuthorsByBio($word);
+
+       return $this->render('auteur/authorsList.html.twig', [
            'authors' => $authors
        ]);
    }
-}
+    }

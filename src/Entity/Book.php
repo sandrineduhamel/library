@@ -32,6 +32,32 @@ class Book
     private $nombreDePages;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="books")
+     */
+    private $author;
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author): void
+    {
+        $this->author = $author;
+    }
+
+    /**
      * @ORM\Column(type="text")
      */
     private $resume;
@@ -39,6 +65,22 @@ class Book
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
     }
 
     public function getTitre(): ?string
